@@ -1,1 +1,1 @@
-Just a simple application to delete, add, edit or add prouducts, with Spring Security using Spring as Backend and Angular as Frontend
+Just a simple application to delete, add, edit or add prouducts, with Spring Security using Spring as Backend and Angular as Frontend. Master-1 contains the Frontend Directory and Master-2 the Backend
