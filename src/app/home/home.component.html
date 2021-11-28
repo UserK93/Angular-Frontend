@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="container">
+    
+        <label for search>Suche... &nbsp;</label>
+        <input type="text" [(ngModel)]="searchValue" class="searchTerm" id="search">
+    
+    
+        <table class="table table-bordered table-striped">
+    
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Produktname</th>
+                    <th>Preis</th>
+                    <th>Anzahl</th>
+                    <th>
+                        <div class="">
+                            <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+                                <i class="fa fa-user"></i>Produkt hinzufügen</button>
+                        </div>
+                    </th>
+    
+                </tr>
+            </thead>
+    
+    
+            <tbody>
+                <tr *ngFor="let product of products | searchfilter: searchValue">
+                    <td><span>{{product.id}}</span></td>
+                    <td><span>{{product.produktname}}</span></td>
+                    <td><span>{{product.preis}}</span></td>
+                    <td><span>{{product.anzahl}}</span></td>
+    
+                    <td>
+                        <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit, product)">
+                            <i class="fa fa-edit"></i>Bearbeiten</button>
+                        <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, product)">
+                            <i class="fa fa-remove"></i>Löschen</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Neues Produkt</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body"> 
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate >
+        <div class="form-group">
+            <label for="produktname">Produktname</label>
+            <div class="input-group">
+                <input id="produktname" name ="produktname"class="form-control" [(ngModel)]="product.produktname">
+            </div>
+        </div>
+  
+        <div class="form-group">
+            <label for="preis">Preis</label>
+            <div class="input-group">
+                <input id="prei" name ="preis"class="form-control"[(ngModel)]="product.preis">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="anzahl"> Anzahl</label>
+            <div class="input-group">
+                <input id="anzahl" name ="anzahl" class="form-control"[(ngModel)]="product.anzahl">
+            </div>
+        </div>
+        <div class="border text-center">
+            <button data-dismiss="modal" class="btn btn-info">Bestätigen</button>
+        </div>
+        
+    </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Produkt bearbeiten</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm" novalidate>
+            <div class="form-group">
+                <label for="produktname">Produktname</label>
+                <div class="input-group">
+                    <input formControlName="produktname" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Preis</label>
+                <div class="input-group">
+                    <input formControlName="preis"class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label> Anzahl</label>
+                <div class="input-group">
+                    <input formControlName="anzahl"class="form-control">
+                </div>
+            </div>
+            <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info" (click)="onSave()" >Änderung speichern</button>
+            </div>
+        </form>
+    </div>
+
+</ng-template>
+
+<ng-template #contentDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Löschen bestätigen</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h2>Wollen Sie das Produkt wirklich löschen?</h2>
+        <div class="border text-center">
+            <button data-dismiss="modal" class="btn btn-danger"(click)="onDelete()">Ja, möchte ich!</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Abbrechen</button>
+    </div>
+</ng-template>
+</body>
+
+
+</html>

@@ -1,0 +1,26 @@
+.border{
+  padding: 10px;
+}
+.btn{
+  margin-right: 10px;
+}
+.fa {
+  margin-right: 10px;
+}
+
+table .btn{
+  margin: 2px;
+  
+}
+
+.container{
+  margin-top:5%;
+}
+
+.searchTerm {
+  
+  border-radius: 25px; 
+  padding: 12px;
+  width: 200px;
+  height: 1px; 
+}
